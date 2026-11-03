@@ -1,0 +1,8 @@
+.DS_Store
+.cache/
+dist/
+__pycache__/
+bin/bpftool
+bin/ttl65.bpf.o
+module.log
+old-*

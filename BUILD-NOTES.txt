@@ -1,0 +1,18 @@
+Upstream: https://github.com/habib-the-sweet/ttl64-hotspot
+Commit: c64067f9d158b41b9fae08841da3852264d06faa
+Original BPF SHA256: 9a171f116b33ec32f8ee76766af3ebefc759c12fa86f775a72456e3171f24276
+Patched BPF SHA256: 8b5f011446157397ea0bb653e9c16d72a429bec2114c02551e7325b864bbc43e
+
+The tested BPF object was adapted by changing its three TARGET immediate
+values from 64 to 65, preserving instruction layout and ELF metadata.
+Matching source is included; this is not a claim of a local source build.
+The packaging script verifies each expected instruction and the final hash.
+
+Official libbpf/bpftool v7.8.1 arm64 loads and pins the program;
+Samsung tc attaches it using object-pinned because its ELF loader is absent.
+The original kernel does not require replacement or a TTL xtables module.
+
+Reproduce the package: python3 scripts/package.py
+Optional independent source build (requires clang with BPF backend):
+clang -target bpf -O2 -g -c src/ttl65.bpf.c -o /tmp/ttl65.bpf.o
+An independent source build is not the exact prebuilt object tested here.
